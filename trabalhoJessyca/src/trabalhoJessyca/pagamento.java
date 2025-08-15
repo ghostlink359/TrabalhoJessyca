@@ -1,26 +1,16 @@
 package trabalhoJessyca;
 
 public class pagamento {
-	private int idPagamento;
 	private pedido idPedido;
 	private float valor;
 	private String metodo;
 	private String status;
-	
-	public pagamento (int idPagamento, pedido idPedido, float valor, String metodo, String status) {
-		this.idPagamento = idPagamento;
+
+	public pagamento(pedido idPedido, float valor, String metodo, String status) {
 		this.idPedido = idPedido;
 		this.valor = valor;
 		this.metodo = metodo;
 		this.status = status;
-	}
-
-	public int getIdPagamento() {
-		return idPagamento;
-	}
-
-	public void setIdPagamento(int idPagamento) {
-		this.idPagamento = idPagamento;
 	}
 
 	public pedido getIdPedido() {
@@ -54,4 +44,18 @@ public class pagamento {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	public void processarPagamento() {
+		if (!status.equalsIgnoreCase("Pago")) {
+			status = "Pago";
+			System.out.println("Pagamento processado com sucesso.");
+		} else {
+			System.out.println("Pagamento já realizado.");
+		}
+	}
+
+	public void verificarStatus() {
+		System.out.println("O status de pagamento é: " + status);
+	}
+
 }

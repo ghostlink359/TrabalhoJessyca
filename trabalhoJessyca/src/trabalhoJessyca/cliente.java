@@ -6,14 +6,13 @@ public class cliente {
 	private String email;
 	private String senha;
 	private String endereco;
-	
-	public cliente(int idCliente, String nome, String email, String senha, String endereco) {
+
+	public cliente(int idCliente, String nome, String email, String endereco) {
 		this.idCliente = idCliente;
 		this.nome = nome;
 		this.email = email;
-		this.senha = senha;
 		this.endereco = endereco;
-		}
+	}
 
 	public int getIdCliente() {
 		return idCliente;
@@ -54,4 +53,18 @@ public class cliente {
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
+
+	public void visualizarPerfil() {
+		System.out.println("Id: " + idCliente);
+		System.out.println("Nome: " + nome);
+		System.out.println("Email: " + email);
+		System.out.println("Endereço: " + endereco);
 	}
+
+	public void atualizarCadastro(String novoNome, String novoEmail, String novoEndereco) {
+		this.nome = novoNome;
+		this.email = novoEmail;
+		this.endereco = novoEndereco;
+	}
+
+}

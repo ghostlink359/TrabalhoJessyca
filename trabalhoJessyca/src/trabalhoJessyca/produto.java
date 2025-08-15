@@ -5,8 +5,8 @@ public class produto {
 	private String nome;
 	private float preco;
 	private int estoque;
-	
-	private produto (int idProduto, String nome, float preco, int estoque) {
+
+	public produto(int idProduto, String nome, float preco, int estoque) {
 		this.idProduto = idProduto;
 		this.nome = nome;
 		this.preco = preco;
@@ -44,4 +44,28 @@ public class produto {
 	public void setEstoque(int estoque) {
 		this.estoque = estoque;
 	}
+
+	public void alterarPreco(float novoPreco) {
+		this.preco = novoPreco;
+	}
+
+	public void atualizarEstoque(int quantidade) {
+		this.estoque += quantidade;
+	}
+
+	public boolean verificarEstoque(int quantidadeDesejada) {
+		return this.estoque >= quantidadeDesejada;
+	}
+
+	public void atualizarProduto(String novoNome, float novoPreco, int novoEstoque) {
+		this.nome = novoNome;
+		this.preco = novoPreco;
+		this.estoque = novoEstoque;
+	}
+
+	@Override
+	public String toString() {
+		return "Produto [ID=" + idProduto + ", Nome=" + nome + ", Preço=" + preco + ", Estoque=" + estoque + "]";
+	}
+
 }

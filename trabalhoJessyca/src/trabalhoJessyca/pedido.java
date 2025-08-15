@@ -5,16 +5,14 @@ import java.util.Date;
 public class pedido {
 	private int idPedido;
 	private cliente idCliente;
-	private Date data;
-	private float valorTotal;
 	private String status;
-	
-	public pedido (int idPedido, cliente idCliente, Date data, float valorTotal, String status) {
+	private carrinho carrinho;
+
+	public pedido(int idPedido, cliente idCliente, carrinho carrinho, String status) {
 		this.idPedido = idPedido;
 		this.idCliente = idCliente;
-		this.data = data;
-		this.valorTotal = valorTotal;
-		this.status = status;
+		this.carrinho = carrinho;
+		this.status = "Aberto";
 	}
 
 	public int getIdPedido() {
@@ -33,22 +31,6 @@ public class pedido {
 		this.idCliente = idCliente;
 	}
 
-	public Date getData() {
-		return data;
-	}
-
-	public void setData(Date data) {
-		this.data = data;
-	}
-
-	public float getValorTotal() {
-		return valorTotal;
-	}
-
-	public void setValorTotal(float valorTotal) {
-		this.valorTotal = valorTotal;
-	}
-
 	public String getStatus() {
 		return status;
 	}
@@ -56,5 +38,15 @@ public class pedido {
 	public void setStatus(String status) {
 		this.status = status;
 	}
- 	
+
+	public void AtualizarStatus(String novoStatus) {
+		this.status = novoStatus;
+	}
+
+	public void exibirResumo() {
+		carrinho.listarProdutos();
+		System.out.println("Total: R$ " + carrinho.calcularTotal());
+		System.out.println("Status: " + status);
+	}
+
 }
