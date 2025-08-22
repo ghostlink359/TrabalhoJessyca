@@ -7,10 +7,15 @@ public class pagamento {
 	private String status;
 
 	public pagamento(pedido idPedido, float valor, String metodo, String status) {
-		this.idPedido = idPedido;
-		this.valor = valor;
-		this.metodo = metodo;
-		this.status = status;
+		try {
+			setIdPedido(idPedido);
+			setValor(valor);
+			setMetodo(metodo);
+			setStatus(status);
+		} catch (IllegalArgumentException e) {
+			System.out.println("Erro ao criar pagamento: " + e.getMessage());
+			this.status = "Pendente";
+		}
 	}
 
 	public pedido getIdPedido() {
@@ -18,6 +23,9 @@ public class pagamento {
 	}
 
 	public void setIdPedido(pedido idPedido) {
+		if (idPedido == null) {
+			throw new IllegalArgumentException("O pagamento precisa estar associado a um pedido.");
+		}
 		this.idPedido = idPedido;
 	}
 
@@ -26,6 +34,9 @@ public class pagamento {
 	}
 
 	public void setValor(float valor) {
+		if (valor <= 0) {
+			throw new IllegalArgumentException("O valor do pagamento deve ser maior que zero.");
+		}
 		this.valor = valor;
 	}
 
@@ -34,6 +45,9 @@ public class pagamento {
 	}
 
 	public void setMetodo(String metodo) {
+		if (metodo == null || metodo.trim().isEmpty()) {
+			throw new IllegalArgumentException("O método de pagamento não pode ser vazio.");
+		}
 		this.metodo = metodo;
 	}
 
@@ -42,20 +56,37 @@ public class pagamento {
 	}
 
 	public void setStatus(String status) {
+		if (status == null || status.trim().isEmpty()) {
+			throw new IllegalArgumentException("O status não pode ser vazio.");
+		}
+
+		String statusLower = status.toLowerCase();
+		if (!statusLower.equals("pendente") && !statusLower.equals("pago") && !statusLower.equals("cancelado")) {
+			throw new IllegalArgumentException("Status inválido. Use: Pendente, Pago ou Cancelado.");
+		}
+
 		this.status = status;
 	}
 
 	public void processarPagamento() {
-		if (!status.equalsIgnoreCase("Pago")) {
-			status = "Pago";
-			System.out.println("Pagamento processado com sucesso.");
-		} else {
-			System.out.println("Pagamento já realizado.");
+		try {
+			if (!status.equalsIgnoreCase("Pago")) {
+				status = "Pago";
+				System.out.println("Pagamento processado com sucesso.");
+			} else {
+				System.out.println("Pagamento já foi realizado.");
+			}
+		} catch (Exception e) {
+			System.out.println("Erro ao processar pagamento: " + e.getMessage());
 		}
 	}
 
 	public void verificarStatus() {
-		System.out.println("O status de pagamento é: " + status);
+		try {
+			System.out.println("Status do pagamento: " + status);
+		} catch (Exception e) {
+			System.out.println("Erro ao verificar status: " + e.getMessage());
+		}
 	}
 
 }
